@@ -5,12 +5,15 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
+  Linking
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserType, UserProfile } from "../types/user";
 import { styles } from "./QuizScreen.styles";
 import { QUESTIONS, RESULT_COPY, OPTIONS } from "./QuizScreen.data";
 import { useProfile } from "../context/ProfileContext";
+
+import { Feather, MaterialIcons } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("window");
 
@@ -127,6 +130,89 @@ export default function QuizScreen({ navigation }: any) {
               </View>
             ) : null}
           </View>
+          {profile?.primaryType === "highRisk" && (
+            <View style={{ marginTop: 20, gap: 16 }}>
+
+              {/* 🇨🇦 CANADA */}
+              <View style={styles.hotlineCard}>
+                <View style={styles.hotlineTopRow}>
+                  <View style={styles.hotlineIconWrap}>
+                    <Feather name="headphones" size={28} color="#E11D48" />
+                  </View>
+
+                  <View style={styles.hotlineBadge}>
+                    <Text style={styles.hotlineBadgeText}>CANADA</Text>
+                  </View>
+                </View>
+
+                <Text style={styles.hotlineTitle}>
+                  988 Mental Health Helpline
+                </Text>
+
+                <Text style={styles.hotlineDescription}>
+                  Free, 24/7 support for anyone experiencing emotional distress in Canada.
+                </Text>
+
+                <View style={styles.hotlineDivider} />
+
+                <View style={styles.hotlineHoursRow}>
+                  <Text style={styles.hotlineHoursLabel}>Available</Text>
+                  <Text style={styles.hotlineHoursValue}>24/7</Text>
+                </View>
+
+                <TouchableOpacity
+                  style={styles.hotlineCallButton}
+                  onPress={() => Linking.openURL("tel:988")}
+                >
+                  <Feather name="phone" size={20} color="white" />
+                  <Text style={styles.hotlineCallButtonText}>Call 988</Text>
+                </TouchableOpacity>
+              </View>
+
+              {/* 🇬🇧 UK */}
+              <View style={styles.hotlineCard}>
+                <View style={styles.hotlineTopRow}>
+                  <View style={styles.hotlineIconWrap}>
+                    <Feather name="headphones" size={28} color="#0EA5E9" />
+                  </View>
+
+                  <View style={[styles.hotlineBadge, { backgroundColor: "#E0F2FE" }]}>
+                    <Text style={[styles.hotlineBadgeText, { color: "#0369A1" }]}>
+                      UK
+                    </Text>
+                  </View>
+                </View>
+
+                <Text style={styles.hotlineTitle}>
+                  NHS 111 Mental Health Support
+                </Text>
+
+                <Text style={styles.hotlineDescription}>
+                  Urgent mental health support via NHS. Select the mental health option when calling.
+                </Text>
+
+                <View style={styles.hotlineDivider} />
+
+                <View style={styles.hotlineHoursRow}>
+                  <Text style={styles.hotlineHoursLabel}>Available</Text>
+                  <Text style={styles.hotlineHoursValue}>24/7</Text>
+                </View>
+
+                <TouchableOpacity
+                  style={[styles.hotlineCallButton, { backgroundColor: "#0F172A" }]}
+                  onPress={() => Linking.openURL("tel:111")}
+                >
+                  <Feather name="phone" size={20} color="white" />
+                  <Text style={styles.hotlineCallButtonText}>Call 111</Text>
+                </TouchableOpacity>
+              </View>
+
+              <Text style={styles.hotlineDisclaimer}>
+                If someone is in immediate danger, please contact emergency services.
+              </Text>
+
+            </View>
+          )}
 
           <TouchableOpacity
             style={[styles.actionButton, { backgroundColor: resultData.color }]}

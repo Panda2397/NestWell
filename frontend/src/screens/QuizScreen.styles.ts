@@ -176,4 +176,126 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#374151",
   },
+  hotlineCard: {
+    marginTop: 20,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 24,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
+    },
+
+    hotlineTopRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 18,
+    },
+
+    hotlineIconWrap: {
+    width: 56,
+    height: 56,
+    borderRadius: 18,
+    backgroundColor: "#FCE7EF",
+    justifyContent: "center",
+    alignItems: "center",
+    },
+
+    hotlineBadge: {
+    backgroundColor: "#FCE7EF",
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 12,
+    },
+
+    hotlineBadgeText: {
+    color: "#BE123C",
+    fontSize: 20,
+    fontWeight: "800",
+    letterSpacing: 1.5,
+    },
+
+    hotlineTitle: {
+    fontSize: 22,
+    fontWeight: "800",
+    color: "#0F172A",
+    marginBottom: 10,
+    },
+
+    hotlineOrgRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginBottom: 20,
+    },
+
+    hotlineOrgText: {
+    fontSize: 14,
+    color: "#94A3B8",
+    fontWeight: "500",
+    },
+
+    hotlineDescription: {
+    fontSize: 16,
+    lineHeight: 26,
+    color: "#64748B",
+    marginBottom: 22,
+    },
+
+    hotlineDivider: {
+    height: 1,
+    backgroundColor: "#E5E7EB",
+    marginBottom: 20,
+    },
+
+    hotlineHoursRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 18,
+    },
+
+    hotlineHoursLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    },
+
+    hotlineHoursLabel: {
+    fontSize: 16,
+    color: "#94A3B8",
+    fontWeight: "500",
+    },
+
+    hotlineHoursValue: {
+    fontSize: 16,
+    color: "#334155",
+    fontWeight: "800",
+    },
+
+    hotlineCallButton: {
+    marginTop: 4,
+    backgroundColor: "#06153A",
+    borderRadius: 22,
+    paddingVertical: 22,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 12,
+    },
+
+    hotlineCallButtonText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "800",
+    },
+
+    hotlineDisclaimer: {
+    marginTop: 14,
+    fontSize: 12,
+    color: "#6B7280",
+    textAlign: "center",
+    },
 });
