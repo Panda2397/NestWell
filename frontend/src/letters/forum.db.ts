@@ -73,7 +73,11 @@ export async function getForumPostsFromDb(): Promise<ForumPost[]> {
 }
 
 export async function addForumPostToDb(input: NewForumPostInput): Promise<ForumPost> {
-  const normalizedUsername = input.username.trim();
+  let normalizedUsername = input.username.trim();
+  if (!normalizedUsername) {
+    normalizedUsername = 'Anonymous';
+  }
+
   const existingUser = userVerifyStore.find(
     (user) => user.username.toLowerCase() === normalizedUsername.toLowerCase(),
   );

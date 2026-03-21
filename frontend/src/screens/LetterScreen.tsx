@@ -125,11 +125,6 @@ export default function letter() {
     await addForumPostToDb({ username, mood, text });
     const updatedPosts = await getForumPostsFromDb();
     setPosts(updatedPosts);
-    setRandomPost(
-      updatedPosts.length > 0
-        ? updatedPosts[Math.floor(Math.random() * updatedPosts.length)]
-        : null
-    );
 
     setNewUsername('');
     setNewPostText('');
@@ -164,41 +159,57 @@ export default function letter() {
         </ScrollView>
       )}
 
-      <View style={styles.addButtonGroup}>
-        <Pressable
-          style={styles.addButton}
-          accessibilityLabel="Add post"
-          onPress={() => {
-            setCreatePostError('');
-            setIsAddModalOpen(true);
-          }}
-        >
-          <View style={styles.addIconHorizontal} />
-          <View style={styles.addIconVertical} />
-        </Pressable>
-        <Text style={styles.bottomButtonLabel}>Write a letter to a Stranger!</Text>
-      </View>
+      <View style={styles.buttonsContainer}>
+        <View style={styles.addButtonGroup}>
+          <Pressable
+            style={styles.addButton}
+            accessibilityLabel="Add post"
+            onPress={() => {
+              setCreatePostError('');
+              setIsAddModalOpen(true);
+            }}
+          >
+            <View style={styles.addIconHorizontal} />
+            <View style={styles.addIconVertical} />
+          </Pressable>
+          <Text style={styles.bottomButtonLabel}>Write a letter to a Stranger!</Text>
+        </View>
 
-      <View style={styles.refreshButtonGroup}>
-        <Pressable
-          style={styles.refreshButton}
-          accessibilityLabel="Show new letter"
-          onPress={handleRefreshLetter}
-        >
-          <Text style={styles.refreshButtonText}>↻</Text>
-        </Pressable>
-        <Text style={styles.bottomButtonLabel}>Read a new letter from a Stranger!</Text>
-      </View>
+        <View style={styles.dangerButtonGroup}>
+          <Pressable
+            style={styles.dangerButton}
+            accessibilityLabel="Report"
+            onPress={handleRefreshLetter} //fake report button(refresh letter)
+          >
+            <Text style={styles.dangerButtonText}>!</Text>
+          </Pressable>
+          <Text style={styles.bottomButtonLabel}>Report{"\n"}letter</Text>
+        </View>
 
-      <View style={styles.dangerButtonGroup}>
-        <Pressable
-          style={styles.dangerButton}
-          accessibilityLabel="Report"
-          onPress={handleRefreshLetter} //fake report button
-        >
-          <Text style={styles.dangerButtonText}>!</Text>
-        </Pressable>
-        <Text style={styles.bottomButtonLabel}>Report{"\n"}letter</Text>
+        <View style={styles.refreshButtonGroup}>
+          <Pressable
+            style={styles.refreshButton}
+            accessibilityLabel="Reply to letter"
+            onPress={() => {
+              setCreatePostError('');
+              setIsAddModalOpen(true); //fake reply button(new letter)
+            }}
+          >
+            <Text style={styles.refreshButtonText}>↩</Text>
+          </Pressable>
+          <Text style={styles.bottomButtonLabel}>Reply{'\n'}letter</Text> 
+        </View>
+
+        <View style={styles.refreshButtonGroup}>
+          <Pressable
+            style={styles.refreshButton}
+            accessibilityLabel="Show new letter"
+            onPress={handleRefreshLetter}
+          >
+            <Text style={styles.refreshButtonText}>↻</Text>
+          </Pressable>
+          <Text style={styles.bottomButtonLabel}>Read a new letter from a Stranger!</Text>
+        </View>
       </View>
 
       <Modal
@@ -210,7 +221,7 @@ export default function letter() {
         <Pressable style={styles.modalOverlay} onPress={() => setIsAddModalOpen(false)}>
           <Pressable style={styles.modalCard} onPress={() => {}}>
             <View style={styles.modalHeaderRow}>
-              <Text style={styles.modalTitle}>Create post</Text>
+              <Text style={styles.modalTitle}>Write a letter!</Text>
               <Pressable
                 style={styles.modalCloseButton}  onPress={() => setIsAddModalOpen(false)}
                 accessibilityLabel="Close popup"
@@ -218,7 +229,13 @@ export default function letter() {
                 <Text style={styles.modalCloseButtonText}>X</Text>
               </Pressable>
             </View>
-
+              <View style={styles.modalGuidelinesBox}>
+              <Text style={styles.modalGuidelinesTitle}>Letter Guidelines</Text>
+              <Text style={styles.modalGuidelinesText}>1. Be kind and respectful.</Text>
+              <Text style={styles.modalGuidelinesText}>2. Do not share personal info.</Text>
+              <Text style={styles.modalGuidelinesText}>3. Keep it supportive and constructive.</Text>
+              <Text style={styles.modalGuidelinesText}>4. Zero tolerance for hateful or harmful language.</Text>
+            </View>
             <Text style={styles.modalFieldLabel}>Username</Text>
             <TextInput
               style={styles.modalInput}
@@ -234,6 +251,7 @@ export default function letter() {
             />
 
             <Text style={styles.modalFieldLabel}>Post</Text>
+
             <TextInput
               style={styles.modalTextarea}
               placeholder="Share your thoughts with the community..."

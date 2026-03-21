@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     padding: 14,
     gap: 5,
-    marginVertical: 5,
+    marginVertical: 25,
   },
   postsScroll: {
     alignSelf: 'stretch',
@@ -92,24 +92,27 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#4f46e5',
   },
-  addButtonGroup: {
-    position: 'absolute',
-    left: '15%',
-    bottom: 18,
-    alignItems: 'center',
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    paddingHorizontal: 16,
+    paddingBottom: 20,
+    gap: 30,
   },
-  refreshButtonGroup: {
-    position: 'absolute',
-    right: '15%',
-    bottom: 18,
+  addButtonGroup: {
     alignItems: 'center',
+    flex: 1,
   },
   dangerButtonGroup: {
-    position: 'absolute',
-    transform: [{ translateX: -25 }],
-    bottom: 18,
     alignItems: 'center',
+    flex: 1,
   },
+  refreshButtonGroup: {
+    alignItems: 'center',
+    flex: 1,
+  },
+
   addButton: {
     width: 50,
     height: 50,
@@ -221,6 +224,27 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#64748b',
     marginTop: 2,
+  },
+  modalGuidelinesBox: {
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    backgroundColor: '#eef2ff',
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    gap: 2,
+  },
+  modalGuidelinesTitle: {
+    fontSize: 13,
+    fontWeight: '800',
+    color: '#1e3a8a',
+    marginBottom: 2,
+  },
+  modalGuidelinesText: {
+    fontSize: 12,
+    lineHeight: 18,
+    color: '#334155',
+    fontWeight: '600',
   },
   modalInput: {
     height: 44,
