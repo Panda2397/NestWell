@@ -1,0 +1,25 @@
+{
+  "posts": [
+    {
+      "id": "p1",
+      "text": "I felt overwhelmed this morning, then took a short walk and felt better.",
+      "username": "alina",
+      "verified_psyc": true,
+      "mood": "Calm"
+    },
+    {
+      "id": "p2",
+      "text": "Finished my assignment draft today and I feel proud.",
+      "username": "jay",
+      "verified_psyc": false,
+      "mood": "Accomplished"
+    },
+    {
+      "id": "p3",
+      "text": "Tried a 10-minute breathing session before bed.",
+      "username": "rhea",
+      "verified_psyc": false,
+      "mood": "Relaxed"
+    }
+  ]
+}
