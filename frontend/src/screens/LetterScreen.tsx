@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Image, Pressable, ScrollView, Modal, TextInput } from 'react-native';
+import { Text, View, Image, Pressable, ScrollView, Modal, TextInput, useWindowDimensions } from 'react-native';
 import styles from '../styles.ts';
 import { addForumPostToDb, getForumPostsFromDb, type ForumPost } from '../letters/forum.db.ts'; //this is a fake db,
 
 type ForumCardViewProps = Pick<ForumPost, 'text' | 'username' | 'verified'>;
+type ActionTooltipKey = 'report' | 'read';
 
 function ForumCard({ text, username, verified}: ForumCardViewProps) {
   const [showBadgeTooltip, setShowBadgeTooltip] = useState(false);
@@ -43,6 +44,8 @@ function ForumCard({ text, username, verified}: ForumCardViewProps) {
 }
 
 export default function letter() {
+  const { width } = useWindowDimensions();
+  const isNarrowScreen = width < 560;
   const [posts, setPosts] = useState<ForumPost[]>([]);
   const [randomPost, setRandomPost] = useState<ForumPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -52,6 +55,7 @@ export default function letter() {
   const [createPostError, setCreatePostError] = useState('');
   const [showCreateHint, setShowCreateHint] = useState(false);
   const [showCreateSuccessPopup, setShowCreateSuccessPopup] = useState(false);
+  const [activeActionTooltip, setActiveActionTooltip] = useState<ActionTooltipKey | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -88,6 +92,30 @@ export default function letter() {
 
     return () => clearTimeout(timeoutId);
   }, [showCreateSuccessPopup]);
+
+  useEffect(() => {
+    if (!activeActionTooltip) {
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      setActiveActionTooltip(null);
+    }, 1400);
+
+    return () => clearTimeout(timeoutId);
+  }, [activeActionTooltip]);
+
+  function runActionWithTooltip(key: ActionTooltipKey, action: () => void) {
+    setActiveActionTooltip(key);
+    action();
+  }
+
+  const tooltipText =
+    activeActionTooltip === 'report'
+      ? 'Reported the letter. Thank you for your feedback!'
+      : activeActionTooltip === 'read'
+        ? 'Refreshed the letter. Here is a new one for you!'
+        : null;
 
   function handleRefreshLetter() {
     if (posts.length === 0) {
@@ -159,8 +187,13 @@ export default function letter() {
         </ScrollView>
       )}
 
-      <View style={styles.buttonsContainer}>
-        <View style={styles.addButtonGroup}>
+      <View
+        style={[
+          styles.buttonsContainer,
+          isNarrowScreen ? styles.buttonsContainerNarrow : styles.buttonsContainerWide,
+        ]}
+      >
+        <View style={[styles.addButtonGroup, isNarrowScreen ? styles.buttonGroupNarrow : styles.buttonGroupWide]}>
           <Pressable
             style={styles.addButton}
             accessibilityLabel="Add post"
@@ -175,18 +208,20 @@ export default function letter() {
           <Text style={styles.bottomButtonLabel}>Write a letter to a Stranger!</Text>
         </View>
 
-        <View style={styles.dangerButtonGroup}>
+        <View style={[styles.dangerButtonGroup, isNarrowScreen ? styles.buttonGroupNarrow : styles.buttonGroupWide]}>
           <Pressable
             style={styles.dangerButton}
             accessibilityLabel="Report"
-            onPress={handleRefreshLetter} //fake report button(refresh letter)
+            onPress={() => {
+              runActionWithTooltip('report', handleRefreshLetter);
+            }} //fake report button(refresh letter)
           >
             <Text style={styles.dangerButtonText}>!</Text>
           </Pressable>
           <Text style={styles.bottomButtonLabel}>Report{"\n"}letter</Text>
         </View>
 
-        <View style={styles.refreshButtonGroup}>
+        <View style={[styles.refreshButtonGroup, isNarrowScreen ? styles.buttonGroupNarrow : styles.buttonGroupWide]}>
           <Pressable
             style={styles.refreshButton}
             accessibilityLabel="Reply to letter"
@@ -200,17 +235,25 @@ export default function letter() {
           <Text style={styles.bottomButtonLabel}>Reply{'\n'}letter</Text> 
         </View>
 
-        <View style={styles.refreshButtonGroup}>
+        <View style={[styles.refreshButtonGroup, isNarrowScreen ? styles.buttonGroupNarrow : styles.buttonGroupWide]}>
           <Pressable
             style={styles.refreshButton}
             accessibilityLabel="Show new letter"
-            onPress={handleRefreshLetter}
+            onPress={() => {
+              runActionWithTooltip('read', handleRefreshLetter);
+            }}
           >
             <Text style={styles.refreshButtonText}>↻</Text>
           </Pressable>
           <Text style={styles.bottomButtonLabel}>Read a new letter from a Stranger!</Text>
         </View>
       </View>
+
+      {tooltipText && (
+        <View style={styles.actionTooltipPageCenter}>
+          <Text style={styles.actionTooltipText}>{tooltipText}</Text>
+        </View>
+      )}
 
       <Modal
         visible={isAddModalOpen}
