@@ -106,8 +106,6 @@ const styles = StyleSheet.create({
   },
   dangerButtonGroup: {
     position: 'absolute',
-    left: '50%',
-    right: '50%',
     transform: [{ translateX: -25 }],
     bottom: 18,
     alignItems: 'center',
