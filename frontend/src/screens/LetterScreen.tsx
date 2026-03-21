@@ -194,11 +194,11 @@ export default function letter() {
         <Pressable
           style={styles.dangerButton}
           accessibilityLabel="Report"
-          onPress={() => {}}
+          onPress={handleRefreshLetter} //fake report button
         >
           <Text style={styles.dangerButtonText}>!</Text>
         </Pressable>
-        <Text style={styles.bottomButtonLabel}>Report this letter{"\n"}</Text>
+        <Text style={styles.bottomButtonLabel}>Report{"\n"}letter</Text>
       </View>
 
       <Modal
