@@ -89,4 +89,13 @@ export const RESULT_COPY: Record<
     bg: "#ECFDF5",
     emoji: "🌿",
     },
+    highRisk: {
+    title: "You May Need Extra Support",
+    subtitle:
+      "It looks like you're experiencing multiple sources of emotional strain. You don’t have to go through this alone — consider reaching out or exploring support options available to you.",
+    color: "#EF4444",
+    bg: "#FEF2F2",
+    emoji: "❤️",
+    },
+    
 };

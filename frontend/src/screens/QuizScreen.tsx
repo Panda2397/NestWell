@@ -31,6 +31,7 @@ export default function QuizScreen({ navigation }: any) {
       lowMood: 0,
       isolation: 0,
       stable: 0,
+      highRisk: 0,
     };
 
     QUESTIONS.forEach((q) => {
@@ -48,6 +49,17 @@ export default function QuizScreen({ navigation }: any) {
     if (totalScore <= 8) {
       return {
         primaryType: "stable",
+      };
+    }
+
+    const allHigh =
+      scores.anxiety >= 8 &&
+      scores.lowMood >= 8 &&
+      scores.isolation >= 8;
+
+    if (allHigh) {
+      return {
+        primaryType: "highRisk",
       };
     }
 
