@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, Image, Pressable, ScrollView, Modal, TextInput } from 'react-native';
 import styles from './styles.ts/letter.styles';
-import { addForumPostToDb, getForumPostsFromDb, type ForumPost } from './forum.db.ts'; //this is a fake db,
+import { addForumPostToDb, getForumPostsFromDb, type ForumPost } from './frontend/src/letters/forum.db.ts'; //this is a fake db,
 
 type ForumCardViewProps = Pick<ForumPost, 'text' | 'username' | 'verified' | 'mood'>;
 
