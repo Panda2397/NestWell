@@ -10,6 +10,7 @@ const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
   return (
+    // @ts-ignore
     <Tab.Navigator screenOptions={tabScreenOptions}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
