@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     height: 46,
     borderRadius: 10,
-    backgroundColor: '#5b5ce2',
+    backgroundColor: '#566077',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   modalPrimaryButtonDisabled: {
-    backgroundColor: '#a5b4fc',
+    backgroundColor: '#8492a8',
   },
   modalPrimaryButtonText: {
     fontSize: 20,
