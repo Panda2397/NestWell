@@ -25,8 +25,6 @@ export default function HomeScreen() {
         onMoveShouldSetPanResponder: (_evt, gesture) =>
         Math.abs(gesture.dx) > 2 || Math.abs(gesture.dy) > 2,
 
-
-
         onPanResponderGrant: () => {
         moved.current = false;
         pan.setOffset({ x: (pan.x as any)._value, y: (pan.y as any)._value });
