@@ -1,0 +1,23 @@
+{
+  "users": [
+    { "userId": "u_0001", "username": "VerifiedDOC", "verified": "doctor" },
+    { "userId": "u_0002", "username": "VerifiedSW", "verified": "social worker" },
+    { "userId": "u_0003", "username": "rhea", "verified": false },
+    { "userId": "u_0004", "username": "Blina", "verified": false },
+    { "userId": "u_0005", "username": "Kay", "verified": "social worker" },
+    { "userId": "u_0006", "username": "Phea", "verified": false },
+    { "userId": "u_0007", "username": "Clina", "verified": false },
+    { "userId": "u_0008", "username": "Day", "verified": "social worker" },
+    { "userId": "u_0009", "username": "mina", "verified": false },
+    { "userId": "u_0010", "username": "omar", "verified": "doctor" },
+    { "userId": "u_0011", "username": "nina", "verified": false },
+    { "userId": "u_0012", "username": "eli", "verified": "social worker" },
+    { "userId": "u_0013", "username": "sara", "verified": false },
+    { "userId": "u_0014", "username": "leo", "verified": "doctor" },
+    { "userId": "u_0015", "username": "ivy", "verified": false },
+    { "userId": "u_0016", "username": "noah", "verified": false },
+    { "userId": "u_0017", "username": "tara", "verified": "social worker" },
+    { "userId": "u_0018", "username": "zane", "verified": false },
+    { "userId": "u_0019", "username": "hana", "verified": false }
+  ]
+}
