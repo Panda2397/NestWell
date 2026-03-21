@@ -4,9 +4,9 @@ import { Text, View, Image, Pressable, ScrollView, Modal, TextInput } from 'reac
 import styles from '../styles.ts';
 import { addForumPostToDb, getForumPostsFromDb, type ForumPost } from '../letters/forum.db.ts'; //this is a fake db,
 
-type ForumCardViewProps = Pick<ForumPost, 'text' | 'username' | 'verified' | 'mood'>;
+type ForumCardViewProps = Pick<ForumPost, 'text' | 'username' | 'verified'>;
 
-function ForumCard({ text, username, verified, mood }: ForumCardViewProps) {
+function ForumCard({ text, username, verified}: ForumCardViewProps) {
   const [showBadgeTooltip, setShowBadgeTooltip] = useState(false);
 
   return (
@@ -38,20 +38,20 @@ function ForumCard({ text, username, verified, mood }: ForumCardViewProps) {
       </View>
 
       <Text style={styles.bodyText}>{text}</Text>
-      <Text style={styles.moodText}>Mood: {mood}</Text>
     </View>
   );
 }
 
 export default function letter() {
   const [posts, setPosts] = useState<ForumPost[]>([]);
+  const [randomPost, setRandomPost] = useState<ForumPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [newUsername, setNewUsername] = useState('');
-  const [newMood, setNewMood] = useState('');
   const [newPostText, setNewPostText] = useState('');
   const [createPostError, setCreatePostError] = useState('');
   const [showCreateHint, setShowCreateHint] = useState(false);
+  const [showCreateSuccessPopup, setShowCreateSuccessPopup] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -61,6 +61,11 @@ export default function letter() {
 
       if (isMounted) {
         setPosts(dbPosts);
+        setRandomPost(
+          dbPosts.length > 0
+            ? dbPosts[Math.floor(Math.random() * dbPosts.length)]
+            : null
+        );
         setIsLoading(false);
       }
     }
@@ -72,13 +77,47 @@ export default function letter() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!showCreateSuccessPopup) {
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      setShowCreateSuccessPopup(false);
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, [showCreateSuccessPopup]);
+
+  function handleRefreshLetter() {
+    if (posts.length === 0) {
+      setRandomPost(null);
+      return;
+    }
+
+    if (posts.length === 1) {
+      setRandomPost(posts[0]);
+      return;
+    }
+
+    setRandomPost((currentPost) => {
+      let nextPost = posts[Math.floor(Math.random() * posts.length)];
+
+      while (currentPost && nextPost.id === currentPost.id) {
+        nextPost = posts[Math.floor(Math.random() * posts.length)];
+      }
+
+      return nextPost;
+    });
+  }
+
   async function handleCreatePost() {
     const username = newUsername.trim();
-    const mood = newMood.trim();
     const text = newPostText.trim();
+    const mood = 'Reflective';
 
-    if (!username || !mood || !text) {
-      setCreatePostError('Please fill in Username, Mood, and Post before creating.');
+    if (!canCreatePost) {
+      setCreatePostError('Please fill 10 ~ 600 characters');
       return;
     }
 
@@ -86,17 +125,20 @@ export default function letter() {
     await addForumPostToDb({ username, mood, text });
     const updatedPosts = await getForumPostsFromDb();
     setPosts(updatedPosts);
+    setRandomPost(
+      updatedPosts.length > 0
+        ? updatedPosts[Math.floor(Math.random() * updatedPosts.length)]
+        : null
+    );
 
     setNewUsername('');
-    setNewMood('');
     setNewPostText('');
     setIsAddModalOpen(false);
+    setShowCreateSuccessPopup(true);
   }
 
   const canCreatePost =
-    newUsername.trim().length > 0 &&
-    newMood.trim().length > 0 &&
-    newPostText.trim().length > 0;
+    newPostText.trim().length < 1000 && newPostText.trim().length >= 10;
 
   return (
     <View style={styles.container}>
@@ -109,29 +151,55 @@ export default function letter() {
           showsVerticalScrollIndicator={true}
           persistentScrollbar={true}
         >
-          {posts.map((post) => (
+          {randomPost ? (
             <ForumCard
-              key={post.id}
-              text={post.text}
-              username={post.username}
-              verified={post.verified}
-              mood={post.mood}
+              key={randomPost.id}
+              text={randomPost.text}
+              username={randomPost.username}
+              verified={randomPost.verified}
             />
-          ))}
+          ) : (
+            <Text style={styles.bodyText}>No posts yet.</Text>
+          )}
         </ScrollView>
       )}
 
-      <Pressable
-        style={styles.addButton}
-        accessibilityLabel="Add post"
-        onPress={() => {
-          setCreatePostError('');
-          setIsAddModalOpen(true);
-        }}
-      >
-        <View style={styles.addIconHorizontal} />
-        <View style={styles.addIconVertical} />
-      </Pressable>
+      <View style={styles.addButtonGroup}>
+        <Pressable
+          style={styles.addButton}
+          accessibilityLabel="Add post"
+          onPress={() => {
+            setCreatePostError('');
+            setIsAddModalOpen(true);
+          }}
+        >
+          <View style={styles.addIconHorizontal} />
+          <View style={styles.addIconVertical} />
+        </Pressable>
+        <Text style={styles.bottomButtonLabel}>Write a letter to a Stranger!</Text>
+      </View>
+
+      <View style={styles.refreshButtonGroup}>
+        <Pressable
+          style={styles.refreshButton}
+          accessibilityLabel="Show new letter"
+          onPress={handleRefreshLetter}
+        >
+          <Text style={styles.refreshButtonText}>↻</Text>
+        </Pressable>
+        <Text style={styles.bottomButtonLabel}>Read a new letter from a Stranger!</Text>
+      </View>
+
+      <View style={styles.dangerButtonGroup}>
+        <Pressable
+          style={styles.dangerButton}
+          accessibilityLabel="Report"
+          onPress={() => {}}
+        >
+          <Text style={styles.dangerButtonText}>!</Text>
+        </Pressable>
+        <Text style={styles.bottomButtonLabel}>Report this letter{"\n"}</Text>
+      </View>
 
       <Modal
         visible={isAddModalOpen}
@@ -154,26 +222,11 @@ export default function letter() {
             <Text style={styles.modalFieldLabel}>Username</Text>
             <TextInput
               style={styles.modalInput}
-              placeholder="Your name"
+              placeholder="Your name (Blank will be anonymous)"
               placeholderTextColor="#94a3b8"
               value={newUsername}
               onChangeText={(value) => {
                 setNewUsername(value);
-                if (createPostError) {
-                  setCreatePostError('');
-                }
-              }}
-            />
-
-
-            <Text style={styles.modalFieldLabel}>Mood</Text>
-            <TextInput
-              style={styles.modalInput}
-              placeholder="Calm, hopeful, stressed..."
-              placeholderTextColor="#94a3b8"
-              value={newMood}
-              onChangeText={(value) => {
-                setNewMood(value);
                 if (createPostError) {
                   setCreatePostError('');
                 }
@@ -201,12 +254,13 @@ export default function letter() {
             <View style={styles.modalPrimaryButtonWrap}>
               {showCreateHint && !canCreatePost && (
                 <View style={styles.modalHintBubble}>
-                  <Text style={styles.modalHintText}>Fill in all first</Text>
+                  <Text style={styles.modalHintText}>Please fill 10 ~ 1000 characters</Text>
                 </View>
               )}
 
               <Pressable
                 style={[styles.modalPrimaryButton, !canCreatePost && styles.modalPrimaryButtonDisabled]}
+                disabled={!canCreatePost}
                 onPress={handleCreatePost}
                 onHoverIn={() => {
                   if (!canCreatePost) {
@@ -228,6 +282,12 @@ export default function letter() {
           </Pressable>
         </Pressable>
       </Modal>
+
+      {showCreateSuccessPopup && (
+        <View style={styles.createSuccessPopup}>
+          <Text style={styles.createSuccessPopupText}>Letter posted successfully!</Text>
+        </View>
+      )}
 
       <StatusBar style="auto" />
 

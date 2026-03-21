@@ -1,164 +1,84 @@
 {
   "posts": [
     {
-      "id": "20",
+      "id": "10",
       "userId": "u_0019",
-      "text": "I finally booked my first counseling session for next week.",
+      "text": "I finally booked my first counseling session for next week after putting it off for months. I called during my lunch break from work, wrote the appointment time on a sticky note, and asked my sister to check in with me the night before so I do not cancel out of anxiety.\n\nIf you are reading this and feeling behind, please know that taking one small step still counts as progress. You do not have to do everything at once to begin healing.",
       "username": "hana",
       "verified": false,
       "mood": "Hopeful"
     },
     {
-      "id": "19",
+      "id": "9",
       "userId": "u_0018",
-      "text": "Had a panic spike on transit, used 5-4-3-2-1, and it passed.",
+      "text": "Had a panic spike on the train ride home when it got crowded and delayed between stations. I used the 5-4-3-2-1 grounding method, texted my roommate that I might be late, and by the time I got off at my stop my breathing had settled down.\n\nI sat on a bench for a few extra minutes before walking home, and reminded myself that panic feels intense but it does pass. If this happens to you too, you are not weak. Your body is trying to protect you, and you deserve patience while it calms.",
       "username": "zane",
       "verified": false,
       "mood": "Brave"
     },
     {
-      "id": "18",
+      "id": "8",
       "userId": "u_0017",
-      "text": "Set a hard stop for work at 6 PM and took time to decompress.",
+      "text": "Set a hard stop for work at 6 PM and actually logged off on time for once. I walked around the block, made rice and eggs instead of ordering delivery, and spent 20 quiet minutes without screens before starting chores.\n\nThe evening felt less chaotic and I noticed my chest was not as tight before bed. A gentle reminder for anyone reading: rest is not a reward you must earn. Rest is basic care, and you are allowed to protect your energy.",
       "username": "tara",
       "verified": "social worker",
       "mood": "Balanced"
     },
     {
-      "id": "17",
+      "id": "7",
       "userId": "u_0016",
-      "text": "Cooked a proper dinner instead of skipping, and I feel steadier.",
+      "text": "Cooked a proper dinner instead of skipping again: chicken soup, toast, and fruit. I noticed I am less irritable in the evening when I eat before 8 PM, and I even had enough energy after dinner to fold laundry that had been sitting on the chair all week.\n\nIt reminded me that basic routines can be a quiet form of self-kindness. If your day feels messy, starting with food, water, and a shower can be enough for today.",
       "username": "noah",
       "verified": false,
       "mood": "Grounded"
     },
     {
-      "id": "16",
+      "id": "6",
       "userId": "u_0015",
-      "text": "Made a small to-do list of 3 tasks and finally got unstuck.",
+      "text": "Made a tiny to-do list with only three tasks: reply to one email, pay the electricity bill, and clean my desk. Finishing those gave me enough momentum to start my project draft, which I had been avoiding since Monday.\n\nBreaking things down made the day feel possible again instead of impossible. If your mind feels overloaded, try shrinking the goal until it feels doable. Small wins can rebuild confidence faster than pressure ever does.",
       "username": "ivy",
       "verified": false,
       "mood": "Productive"
     },
     {
-      "id": "15",
+      "id": "5",
       "userId": "u_0014",
-      "text": "Practiced box breathing before a meeting and stayed more focused.",
+      "text": "Practiced box breathing for five minutes before a difficult team meeting. I still felt nervous, but I did not lose my train of thought this time, and I was able to ask for a deadline extension instead of silently panicking.\n\nNobody judged me for speaking up, and I left the call feeling more in control than usual. To anyone struggling at work right now: asking for support is a strength, not a failure. You deserve space to do things sustainably.",
       "username": "leo",
       "verified": "doctor",
       "mood": "Focused"
     },
     {
-      "id": "14",
+      "id": "4",
       "userId": "u_0013",
-      "text": "I replaced doom-scrolling with a short podcast walk this morning.",
+      "text": "Replaced my usual 40 minutes of doom-scrolling with a short morning walk while listening to a podcast. It sounds small, but starting the day outside made my commute feel less heavy and I had fewer stress headaches by noon.\n\nI am trying to build mornings that feel kinder, not perfect. If you are stuck in anxious scrolling, even five minutes of fresh air can shift your mood. You are allowed to choose habits that protect your peace.",
       "username": "sara",
       "verified": false,
       "mood": "Motivated"
     },
     {
-      "id": "13",
+      "id": "3",
       "userId": "u_0012",
-      "text": "Did not sleep much, so I am keeping expectations low and being gentle today.",
+      "text": "I only slept about four hours because my neighbors were loud, so I am keeping expectations realistic today. I told my manager I may respond slower, skipped extra commitments, and focused on one essential task so I do not crash by evening.\n\nI used to call this laziness, but it is actually pacing and care. If you are tired, it is okay to do less. Preserving your mental health today helps you show up tomorrow.",
       "username": "eli",
       "verified": "social worker",
       "mood": "Tired"
     },
     {
-      "id": "12",
+      "id": "2",
       "userId": "u_0011",
-      "text": "Called a friend instead of isolating tonight, and it helped a lot.",
+      "text": "Called a friend instead of isolating tonight after work. We talked for 25 minutes about normal life stuff like groceries, rent, and weekend plans, and that simple conversation helped me feel connected instead of stuck in my own head.\n\nI did not need perfect advice, I just needed to feel less alone for a moment. If reaching out feels hard, start with one message to one safe person. Connection can be quiet and still be powerful.",
       "username": "nina",
       "verified": false,
       "mood": "Supported"
     },
     {
-      "id": "11",
+      "id": "1",
       "userId": "u_0010",
-      "text": "Spent 15 minutes stretching and my tension headache eased up.",
+      "text": "Spent 15 minutes stretching my neck and shoulders after sitting at my desk all day, and the tension headache eased up. I also drank water before coffee in the afternoon, which helped me avoid the shaky feeling I usually get.\n\nMy body was carrying more stress than I realized, and slowing down helped me notice it sooner. For anyone reading this: your body deserves care too. A short stretch, a glass of water, and one deep breath can be a meaningful reset.",
       "username": "omar",
       "verified": "doctor",
       "mood": "Relieved"
-    },
-    {
-      "id": "10",
-      "userId": "u_0009",
-      "text": "I started journaling after lunch and noticed my thoughts felt less heavy.",
-      "username": "mina",
-      "verified": false,
-      "mood": "Reflective"
-    },
-    {
-      "id": "9",
-      "userId": "u_0006",
-      "text": "Tried a 30-minute breathing session before bed.",
-      "username": "Phea",
-      "verified": false,
-      "mood": "Relaxed"
-    },
-    {
-      "id": "8",
-      "userId": "u_0008",
-      "text": "Finished my assignment draft last week and I feel proud.",
-      "username": "Day",
-      "verified": "social worker",
-      "mood": "Accomplished"
-    },
-    {
-      "id": "7",
-      "userId": "u_0007",
-      "text": "I felt overwhelmed this afternoon, then took a short walk and felt better.",
-      "username": "Clina",
-      "verified": false,
-      "mood": "Calm"
-    },
-    {
-      "id": "6",
-      "userId": "u_0006",
-      "text": "Tried a 20-minute breathing session before bed.",
-      "username": "Phea",
-      "verified": false,
-      "mood": "Relaxed"
-    },
-    {
-      "id": "5",
-      "userId": "u_0005",
-      "text": "Finished my assignment draft yesterday and I feel proud.",
-      "username": "Kay",
-      "verified": "social worker",
-      "mood": "Accomplished"
-    },
-    {
-      "id": "4",
-      "userId": "u_0004",
-      "text": "I felt overwhelmed this evening, then took a short walk and felt better.",
-      "username": "Blina",
-      "verified": false,
-      "mood": "Calm"
-    },
-    {
-      "id": "3",
-      "userId": "u_0003",
-      "text": "Tried a 10-minute breathing session before bed.",
-      "username": "rhea",
-      "verified": false,
-      "mood": "Relaxed"
-    },
-    {
-      "id": "2",
-      "userId": "u_0002",
-      "text": "Finished my assignment draft today and I feel proud.",
-      "username": "VerifiedSW",
-      "verified": "social worker",
-      "mood": "Accomplished"
-    },
-    {
-      "id": "1",
-      "userId": "u_0001",
-      "text": "I felt overwhelmed this morning, then took a short walk and felt better.",
-      "username": "VerifiedDOC",
-      "verified": "doctor",
-      "mood": "Calm"
     }
   ]
 }
