@@ -1,4 +1,4 @@
-export type UserType = "emotional" | "practical" | "resource";
+export type UserType = "anxiety" | "lowMood" | "isolation" | "stable";
 
 export type UserProfile = {
   primaryType: UserType;
