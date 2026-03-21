@@ -6,6 +6,7 @@ import Tabs from "./src/navigation/Tabs";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   return (
     <ProfileProvider>
       <NavigationContainer>
@@ -19,4 +20,6 @@ export default function App() {
       </NavigationContainer>
     </ProfileProvider>
   );
+  
 }
+
