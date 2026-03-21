@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserType, UserProfile } from "../types/user";
 import { styles } from "./QuizScreen.styles";
 import { QUESTIONS, RESULT_COPY, OPTIONS } from "./QuizScreen.data";
+import { useProfile } from "../context/ProfileContext";
 
 const { width } = Dimensions.get("window");
 
@@ -18,10 +19,11 @@ export default function QuizScreen({ navigation }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [finished, setFinished] = useState(false);
-  const [profile, setProfile] = useState<UserProfile | null>(null);
 
   const currentQuestion = QUESTIONS[currentIndex];
   const progress = ((currentIndex + 1) / QUESTIONS.length) * 100;
+
+  const {profile, setProfile} = useProfile();
 
   const scoreProfile = (allAnswers: Record<number, number>): UserProfile => {
     const scores: Record<UserType, number> = {
