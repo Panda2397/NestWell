@@ -4,6 +4,8 @@ import { Calendar, DateData } from "react-native-calendars";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TextInput, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { useNavigation } from "@react-navigation/native";
+
 
 type Mood = "sad" | "stressed" | "ok" | "good" | "great";
 
@@ -25,10 +27,36 @@ const moodStyle: Record<Mood, { emoji: string; bgColor: string }> = {
   great: { emoji: "😄", bgColor: "rgba(59, 130, 246, 0.25)" },
 };
 
+const hasOverThreeDays = (entries: Entries) => {
+  const today = new Date();
+  let cnt = 7;
+
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() - i);
+
+    const dateString = d.toISOString().slice(0, 10);
+    const mood = entries[dateString]?.mood;
+
+    if (mood !== "sad") {
+      cnt --;
+    }
+  }
+
+  return cnt > 3;
+};
+
+
+
 export default function MoodCalendar() {
   const today = new Date().toISOString().slice(0, 10);
   const [selectedDate, setSelectedDate] = useState<string>(today);
   const [entries, setEntries] = useState<Entries>({});
+
+  const navigation = useNavigation<any>();
+
+
+  const isSadRiskDetected = hasOverThreeDays(entries);
 
   // Load saved moods
   useEffect(() => {
@@ -173,6 +201,50 @@ export default function MoodCalendar() {
             <Text style={{ color: "#991b1b", fontWeight: "700" }}>Remove mood for this day</Text>
           </TouchableOpacity>
         ) : null}
+
+        {isSadRiskDetected && (
+          <View
+            style={{
+              marginTop: 16,
+              backgroundColor: "#FEF2F2",
+              borderRadius: 16,
+              padding: 16,
+              borderWidth: 1,
+              borderColor: "#FECACA",
+            }}
+          >
+            <Text style={{ fontSize: 16, fontWeight: "800", color: "#B91C1C" }}>
+              We noticed you may be having a hard week
+            </Text>
+
+            <Text
+              style={{
+                marginTop: 8,
+                fontSize: 14,
+                lineHeight: 22,
+                color: "#7F1D1D",
+              }}
+            >
+              You have logged feeling sad for over 3 days recently. You don’t have to go
+              through this alone. Consider reaching out for support or exploring some
+              calming resources.
+            </Text>
+                <TouchableOpacity
+              style={{
+                marginTop: 20,
+                backgroundColor: "#B91C1C",
+                paddingVertical: 12,
+                borderRadius: 12,
+                alignItems: "center",
+              }}
+              onPress={() => navigation?.navigate?.("Hotline")}
+            >
+              <Text style={{ color: "white", fontWeight: "700" }}>
+                View Hotline Support
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 10 }}>
     Notes for {selectedDate}
