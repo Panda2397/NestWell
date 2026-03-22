@@ -1,22 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
-  titleBar: {
-    alignSelf: 'stretch',
-    marginHorizontal: -16,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#1e3a8a',
-    borderBottomWidth: 1,
-    borderBottomColor: '#1d4ed8',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '800',
-    color: '#ffffff',
-    textAlign: 'center',
-  },
-  
+const learnStyles = StyleSheet.create({
   learnContainer: {
     flex: 1,
     backgroundColor: '#eef2f7',
@@ -164,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default learnStyles;
