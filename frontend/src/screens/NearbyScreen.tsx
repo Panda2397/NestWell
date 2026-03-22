@@ -304,29 +304,33 @@ export default function NearbyScreen() {
     </View>
 
       {/* Hospital list */}
+      <View>
+      <ScrollView>
       {filteredHospitals.map((hospital) => {
-  const isSelected = selectedHospitalId === hospital.institution_eng;
+        const isSelected = selectedHospitalId === hospital.institution_eng;
 
-  return (
-    <TouchableOpacity
-      key={hospital.institution_eng}
-      onPress={() => setSelectedHospitalId(hospital.institution_eng)}
-      style={[
-        styles.hospitalCard,
-        isSelected && {
-          borderWidth: 2,
-          borderColor: "#4338CA",
-          backgroundColor: "#EEF2FF",
-        },
-      ]}
-    >
-      <Text style={styles.hospitalName}>{hospital.institution_eng}</Text>
-      <Text style={styles.hospitalName}>{hospital.institution_tc}</Text>
-      <Text style={styles.hospitalAdd}>{hospital.address_eng}</Text>
-      <Text style={styles.hospitalAdd}>{hospital.address_tc}</Text>
-    </TouchableOpacity>
-  );
-})}
+        return (
+          <TouchableOpacity
+            key={hospital.institution_eng}
+            onPress={() => setSelectedHospitalId(hospital.institution_eng)}
+            style={[
+              styles.hospitalCard,
+              isSelected && {
+                borderWidth: 2,
+                borderColor: "#4338CA",
+                backgroundColor: "#EEF2FF",
+              },
+            ]}
+          >
+            <Text style={styles.hospitalName}>{hospital.institution_eng}</Text>
+            <Text style={styles.hospitalName}>{hospital.institution_tc}</Text>
+            <Text style={styles.hospitalAdd}>{hospital.address_eng}</Text>
+            <Text style={styles.hospitalAdd}>{hospital.address_tc}</Text>
+          </TouchableOpacity>
+        );
+      })}
+      </ScrollView>
+      </View>
     </ScrollView>
   );
 }

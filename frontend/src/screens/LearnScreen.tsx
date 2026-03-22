@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { Linking, Pressable, ScrollView, Text, View, Image } from 'react-native';
 import styles from './styles/LearnScreen.styles';
 import VerifiedBadge from '../components/VerifiedBadge';
-import { UserType} from '../types/user';
+import { UserType } from '../types/user';
 import { useProfile } from '../context/ProfileContext';
 import { getLearnArticlesFromDb } from '../databases/learn/learn.db.ts';
 
