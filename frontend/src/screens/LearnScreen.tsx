@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { Linking, Pressable, ScrollView, Text, View, Image } from 'react-native';
 import styles from '../styles.ts';
 import LearnData from '../learn/learn-example-data.json';
+import { UserType } from '../types/user.ts';
+import { useProfile } from '../context/ProfileContext.tsx';
 
 type LearnArticle = {
   id: string;
@@ -19,6 +21,27 @@ export default function LearnScreen() {
   const [selectedCategory, setSelectedCategory] = useState<string>(ALL_CATEGORIES);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [activeBadgeTooltip, setActiveBadgeTooltip] = useState<string | null>(null);
+
+  const { profile } = useProfile();
+
+  
+
+  const categoryToUserTypeMap: Record<string, UserType[]> = {
+    Stress: ["anxiety", "highRisk"],
+    Mindfulness: ["anxiety", "lowMood"],
+    Sleep: ["lowMood", "anxiety"],
+    Support: ["isolation", "highRisk"],
+    Connection: ["isolation"],
+    Parenting: ["stable", "lowMood"],
+  };
+
+  const recommendedArticles = useMemo(() => {
+    if (!profile?.primaryType) return [];
+
+    return articles.filter((article) =>
+      categoryToUserTypeMap[article.category]?.includes(profile.primaryType)
+    );
+  }, [articles, profile]);
 
   const categories = useMemo(() => {
     const cats = Array.from(new Set(articles.map((a) => a.category))).sort();
@@ -38,9 +61,12 @@ export default function LearnScreen() {
   }
 
   return (
+    
+
     <View style={styles.learnContainer}>
       <View style={styles.learnTopBar}>
         <View style={styles.learnCategoryWrap}>
+          
           <Pressable
             style={styles.learnCategoryButton}
             onPress={() => setIsCategoryOpen((current) => !current)}
@@ -49,6 +75,8 @@ export default function LearnScreen() {
             <Text style={styles.learnCategoryButtonText}>{selectedCategory}</Text>
             <Text style={styles.learnCategoryChevron}>{isCategoryOpen ? '▲' : '▼'}</Text>
           </Pressable>
+
+          
 
           {isCategoryOpen && (
             <View style={styles.learnCategoryDropdown}>
@@ -76,6 +104,38 @@ export default function LearnScreen() {
         showsVerticalScrollIndicator={true}
       >
         <View style={styles.learnCardsContainer}>
+
+          {recommendedArticles.length > 0 && (
+            <View style={styles.learnRecommendedSection}>
+              <Text style={styles.learnSectionTitle}>Recommended for you</Text>
+
+              {recommendedArticles.slice(0, 3).map((article) => (
+                <View key={`rec-${article.id}`} style={styles.learnCard}>
+                  
+                  <Text style={styles.learnCardCategory}>{article.category}</Text>
+                  <Text style={styles.learnCardTitle} numberOfLines={2}>
+                    {article.title}
+                  </Text>
+
+                  <Pressable onPress={() => handleOpenArticle(article.url)}>
+                    <Text style={styles.learnCardLink}>
+                      Read {article.id.startsWith('a') ? 'article' : article.id.startsWith('v') ? 'video' : 'resource'}
+                    </Text>
+                  </Pressable>
+
+                  {(article.human_checked || article.ai_checked) && (
+                    <View style={styles.learnVerifiedBadge}>
+                      <Text style={styles.learnVerifiedText}>
+                        {article.human_checked ? 'Verified by Human' : 'Verified by AI'}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              ))}
+            </View>
+          )}
+
+          <Text style={styles.learnSectionTitle}>All resources</Text>
           {filteredArticles.map((article) => (
             <View key={article.id} style={styles.learnCard}>
               <View style={styles.learnCardHeader}>
@@ -96,9 +156,7 @@ export default function LearnScreen() {
 
                     {activeBadgeTooltip === article.id && (
                       <View style={styles.badgeTooltip}>
-                        <Text style={styles.badgeTooltipText}>
-                          {`Doctor verified`}
-                        </Text>
+                        <Text style={styles.badgeTooltipText}>Doctor verified</Text>
                       </View>
                     )}
                   </View>
@@ -108,7 +166,9 @@ export default function LearnScreen() {
               <Text style={styles.learnCardTitle}>{article.title}</Text>
 
               <Pressable onPress={() => handleOpenArticle(article.url)}>
-                <Text style={styles.learnCardLink}>Read {article.id.startsWith('a') ? 'article' : article.id.startsWith('v') ? 'video' : 'resource'}</Text>
+                <Text style={styles.learnCardLink}>
+                  Read {article.id.startsWith('a') ? 'article' : article.id.startsWith('v') ? 'video' : 'resource'}
+                </Text>
               </Pressable>
             </View>
           ))}

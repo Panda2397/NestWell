@@ -486,7 +486,7 @@ const styles = StyleSheet.create({
     rowGap: 12,
   },
   learnCard: {
-    width: '49%',
+    width: '100%',
     minHeight: 150,
     borderRadius: 12,
     borderWidth: 1,
@@ -513,8 +513,8 @@ const styles = StyleSheet.create({
   },
   learnCardTitle: {
     color: '#0f172a',
-    fontSize: 28,
-    lineHeight: 22,
+    fontSize: 22,
+    lineHeight: 24,
     fontWeight: '800',
     marginTop: 6,
     marginBottom: 10,
@@ -540,6 +540,23 @@ const styles = StyleSheet.create({
     color: '#1e3a8a',
     fontSize: 12,
     fontWeight: '700',
+  },
+   learnRecommendedSection: {
+    width: "100%",
+    marginBottom: 12,
+  },
+
+  learnSectionTitle: {
+    fontSize: 22,
+    fontWeight: "800",
+    color: "#111827",
+    marginBottom: 16,
+  },
+
+  learnSectionSubtitle: {
+    fontSize: 14,
+    color: "#6B7280",
+    marginBottom: 12,
   },
 });
 
