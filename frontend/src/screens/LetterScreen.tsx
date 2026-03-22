@@ -123,7 +123,7 @@ export default function letter() {
     const mood = 'Reflective';
 
     if (!canCreatePost) {
-      setCreatePostError('Please fill 10 ~ 600 characters');
+      setCreatePostError('Please fill 10 ~ 1000 characters');
       return;
     }
 
@@ -139,7 +139,7 @@ export default function letter() {
   }
 
   const canCreatePost =
-    newPostText.trim().length < 1000 && newPostText.trim().length >= 10;
+    newPostText.trim().length < 1000 && newPostText.trim().length >= 1;
 
   return (
     <View style={styles.container}>

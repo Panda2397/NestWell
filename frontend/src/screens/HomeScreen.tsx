@@ -1,10 +1,11 @@
-import { View, Text, Button, ScrollView  } from "react-native";
+import { View, Text, Button, ScrollView, Platform } from "react-native";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useRef } from "react";
 import { Animated, PanResponder, Pressable } from "react-native";
 import MoodCalendar from "../components/MoodCalendar";
 import { useProfile } from "../context/ProfileContext";
+import { sendImmediateNotification, registerPermissions} from '../utils/notifications';
 
 export default function HomeScreen() {
     const [mood, setMood] = useState<string | null>(null);
@@ -14,6 +15,15 @@ export default function HomeScreen() {
     const moved = useRef(false);
 
     const { profile } = useProfile();
+    const [notifPerm, setNotifPerm] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (Platform.OS === 'web' && typeof Notification !== 'undefined') {
+            setNotifPerm(Notification.permission);
+        } else {
+            setNotifPerm(null);
+        }
+    }, []);
 
 
     // This only be called when first mount
@@ -49,6 +59,7 @@ export default function HomeScreen() {
             <Text style={{ fontSize: 20, fontWeight: "600" }}>How are you today?</Text>
 
             <View style={{ gap: 8 }}>
+                <Button title="Send NOTI." onPress={async () => { await sendImmediateNotification()}} />
                 <Button title="😢 Stressed" onPress={() => setMood("stressed")} />
                 <Button title="😐 OK" onPress={() => setMood("ok")} />
                 <Button title="🙂 Good" onPress={() => setMood("good")} />
