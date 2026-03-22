@@ -42,7 +42,7 @@ function ForumCard({ text, username, verified}: ForumCardViewProps) {
   );
 }
 
-export default function letter() {
+export default function Letter() {
   const [posts, setPosts] = useState<ForumPost[]>([]);
   const [randomPost, setRandomPost] = useState<ForumPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);

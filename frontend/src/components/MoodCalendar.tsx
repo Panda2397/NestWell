@@ -237,7 +237,7 @@ export default function MoodCalendar() {
                 borderRadius: 12,
                 alignItems: "center",
               }}
-              onPress={() => navigation?.navigate?.("Hotline")}
+              onPress={() => navigation?.navigate?.("Nearby")}
             >
               <Text style={{ color: "white", fontWeight: "700" }}>
                 View Hotline Support
