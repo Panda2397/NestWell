@@ -2,9 +2,9 @@ import { useMemo, useState } from 'react';
 import { Linking, Pressable, ScrollView, Text, View, Image } from 'react-native';
 import styles from './styles/LearnScreen.styles';
 import VerifiedBadge from '../components/VerifiedBadge';
-import LearnData from '../databases/learn/learn-example-data.json';
 import { UserType} from '../types/user';
 import { useProfile } from '../context/ProfileContext';
+import { getLearnArticlesFromDb } from '../databases/learn/learn.db.ts';
 
 
 type LearnArticle = {
@@ -19,7 +19,7 @@ type LearnArticle = {
 const ALL_CATEGORIES = 'All Categories';
 
 export default function LearnScreen() {
-  const [articles] = useState<LearnArticle[]>(LearnData.articles || []);
+  const [articles, setArticles] = useState<LearnArticle[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>(ALL_CATEGORIES);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   
@@ -57,6 +57,23 @@ export default function LearnScreen() {
 
     return articles.filter((article) => article.category === selectedCategory);
   }, [selectedCategory, articles]);
+
+  // load articles from the mock DB on mount
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const rows = await getLearnArticlesFromDb();
+        if (mounted) setArticles(rows);
+      } catch (err) {
+        // ignore for now
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   async function handleOpenArticle(url: string) {
     await Linking.openURL(url);
