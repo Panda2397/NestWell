@@ -11,6 +11,7 @@ import * as Location from "expo-location";
 import { Feather } from "@expo/vector-icons";
 import NearbyMap from "../components/NearbyMap";
 import hospitalData from "../data/facility-hosp.json"
+import { useNavigation } from "@react-navigation/native";
 
 
 type Region = {
@@ -51,7 +52,7 @@ export default function NearbyScreen() {
   const [hospitals, setHospitals] = useState<
     (HospitalRecord & { distanceKm: number })[]
   >([]);
-  
+     const navigation = useNavigation<any>();
   
 
   useEffect(() => {
@@ -359,6 +360,23 @@ export default function NearbyScreen() {
           </TouchableOpacity>
         );
       })}
+
+
+<TouchableOpacity
+              style={{
+                marginTop: 20,
+                backgroundColor: "#B91C1C",
+                paddingVertical: 12,
+                borderRadius: 12,
+                alignItems: "center",
+              }}
+              onPress={() => navigation?.navigate?.("BookingList")}
+            >
+              <Text style={{ color: "white", fontWeight: "700" }}>
+                (Stage 2 developer) booking
+              </Text>
+            </TouchableOpacity>
+
     </ScrollView>
   );
 }
