@@ -1,0 +1,39 @@
+{
+    "articles": [
+        {
+            "id": "v1",
+            "title": "3-Minute Stress Management: Reduce Stress With This Short Activity",
+            "category": "Stress",
+            "url": "https://www.youtube.com/watch?v=grfXR6FAsI8",
+            "human_checked": true
+        },
+        {
+            "id": "a2",
+            "title": "Practical Sleep Hygiene Checklist",
+            "category": "Sleep",
+            "url": "https://www.sleepfoundation.org/sleep-hygiene",
+            "human_checked": false
+        },
+        {
+            "id": "a3",
+            "title": "Grounding Techniques for Stressful Days",
+            "category": "Stress",
+            "url": "https://www.healthline.com/health/grounding-techniques",
+            "human_checked": false
+        },
+        {
+            "id": "a4",
+            "title": "Beginner Mindfulness Guide",
+            "category": "Mindfulness",
+            "url": "https://www.mindful.org/meditation/mindfulness-getting-started/",
+            "human_checked": false
+        },
+        {
+            "id": "a5",
+            "title": "Breathing Exercises to Reset Your Mood",
+            "category": "Stress",
+            "url": "https://www.verywellmind.com/abdominal-breathing-2584115",
+            "human_checked": false
+        }
+    ]
+}

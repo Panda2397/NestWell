@@ -502,12 +502,18 @@ const styles = StyleSheet.create({
   },
   learnCardCategory: {
     color: '#4f46e5',
-    fontSize: 12,
+    fontSize: 22,
     fontWeight: '700',
+  },
+  learnCardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 8,
   },
   learnCardTitle: {
     color: '#0f172a',
-    fontSize: 17,
+    fontSize: 28,
     lineHeight: 22,
     fontWeight: '800',
     marginTop: 6,
@@ -515,9 +521,25 @@ const styles = StyleSheet.create({
   },
   learnCardLink: {
     color: '#0ea5e9',
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: '700',
     textDecorationLine: 'underline',
+  },
+  learnVerifiedBadge: {
+    marginTop: 8,
+    marginBottom: 6,
+    alignSelf: 'flex-start',
+    backgroundColor: '#eef6ff',
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: '#cfe0ff',
+  },
+  learnVerifiedText: {
+    color: '#1e3a8a',
+    fontSize: 12,
+    fontWeight: '700',
   },
 });
 

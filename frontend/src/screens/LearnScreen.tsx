@@ -1,55 +1,37 @@
 import { useMemo, useState } from 'react';
-import { Linking, Pressable, ScrollView, Text, View } from 'react-native';
+import { Linking, Pressable, ScrollView, Text, View, Image } from 'react-native';
 import styles from '../styles.ts';
+import LearnData from '../learn/learn-example-data.json';
 
 type LearnArticle = {
   id: string;
   title: string;
-  category: 'Stress' | 'Sleep' | 'Anxiety' | 'Mindfulness';
+  category: string;
   url: string;
+  ai_checked?: boolean;
+  human_checked?: boolean;
 };
 
-const ARTICLES: LearnArticle[] = [
-  {
-    id: 'a2',
-    title: 'Practical Sleep Hygiene Checklist',
-    category: 'Sleep',
-    url: 'https://www.sleepfoundation.org/sleep-hygiene',
-},
-  {
-    id: 'a3',
-    title: 'Grounding Techniques for Stressful Days',
-    category: 'Stress',
-    url: 'https://www.healthline.com/health/grounding-techniques',
-  },
-  {
-    id: 'a4',
-    title: 'Beginner Mindfulness Guide',
-    category: 'Mindfulness',
-    url: 'https://www.mindful.org/meditation/mindfulness-getting-started/',
-  },
-  {
-    id: 'a5',
-    title: 'Breathing Exercises to Reset Your Mood',
-    category: 'Stress',
-    url: 'https://www.verywellmind.com/abdominal-breathing-2584115',
-  },
-];
-
 const ALL_CATEGORIES = 'All Categories';
-const CATEGORIES = [ALL_CATEGORIES, 'Stress', 'Sleep', 'Anxiety', 'Mindfulness'] as const;
 
 export default function LearnScreen() {
-  const [selectedCategory, setSelectedCategory] = useState<(typeof CATEGORIES)[number]>(ALL_CATEGORIES);
+  const [articles] = useState<LearnArticle[]>(LearnData.articles || []);
+  const [selectedCategory, setSelectedCategory] = useState<string>(ALL_CATEGORIES);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [activeBadgeTooltip, setActiveBadgeTooltip] = useState<string | null>(null);
+
+  const categories = useMemo(() => {
+    const cats = Array.from(new Set(articles.map((a) => a.category))).sort();
+    return [ALL_CATEGORIES, ...cats];
+  }, [articles]);
 
   const filteredArticles = useMemo(() => {
     if (selectedCategory === ALL_CATEGORIES) {
-      return ARTICLES;
+      return articles;
     }
 
-    return ARTICLES.filter((article) => article.category === selectedCategory);
-  }, [selectedCategory]);
+    return articles.filter((article) => article.category === selectedCategory);
+  }, [selectedCategory, articles]);
 
   async function handleOpenArticle(url: string) {
     await Linking.openURL(url);
@@ -70,7 +52,7 @@ export default function LearnScreen() {
 
           {isCategoryOpen && (
             <View style={styles.learnCategoryDropdown}>
-              {CATEGORIES.map((category) => (
+              {categories.map((category) => (
                 <Pressable
                   key={category}
                   style={styles.learnCategoryItem}
@@ -96,10 +78,37 @@ export default function LearnScreen() {
         <View style={styles.learnCardsContainer}>
           {filteredArticles.map((article) => (
             <View key={article.id} style={styles.learnCard}>
-              <Text style={styles.learnCardCategory}>{article.category}</Text>
+              <View style={styles.learnCardHeader}>
+                <Text style={styles.learnCardCategory}>{article.category}</Text>
+                {(article.human_checked || article.ai_checked) && (
+                  <View style={styles.verifiedBadgeWrap}>
+                    <Pressable
+                      onPress={() => setActiveBadgeTooltip((cur) => (cur === article.id ? null : article.id))}
+                      onMouseEnter={() => setActiveBadgeTooltip(article.id)}
+                      onMouseLeave={() => setActiveBadgeTooltip(null)}
+                      accessibilityLabel={article.human_checked ? 'Verified (Human)' : 'Verified (AI)'}
+                    >
+                      <Image
+                        source={require('../../assets/verfied_badge.png')}
+                        style={styles.verifiedBadgeImage}
+                      />
+                    </Pressable>
+
+                    {activeBadgeTooltip === article.id && (
+                      <View style={styles.badgeTooltip}>
+                        <Text style={styles.badgeTooltipText}>
+                          {`Doctor verified`}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                )}
+              </View>
+
               <Text style={styles.learnCardTitle}>{article.title}</Text>
+
               <Pressable onPress={() => handleOpenArticle(article.url)}>
-                <Text style={styles.learnCardLink}>Read article</Text>
+                <Text style={styles.learnCardLink}>Read {article.id.startsWith('a') ? 'article' : article.id.startsWith('v') ? 'video' : 'resource'}</Text>
               </Pressable>
             </View>
           ))}
