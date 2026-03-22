@@ -4,6 +4,9 @@ import LearnScreen from "../screens/LearnScreen";
 import NearbyScreen from "../screens/NearbyScreen";
 import QuizScreen from "../screens/QuizScreen";
 import LetterScreen from "../screens/LetterScreen";
+import BookingListScreen from "../screens/BookingListScreen";
+import BookingDetailScreen from "../screens/BookingDetailScreen";
+
  // @ts-ignore
 import { tabScreenOptions } from "./Tabs.styles";
 
@@ -18,6 +21,7 @@ export default function Tabs() {
       <Tab.Screen name="Quiz" component={QuizScreen} />
       <Tab.Screen name="Letters" component={LetterScreen} />
       <Tab.Screen name="Learn" component={LearnScreen} />
+      <Tab.Screen name="Booking" component={BookingListScreen} />
       <Tab.Screen name="Nearby" component={NearbyScreen} />
     </Tab.Navigator>
   );

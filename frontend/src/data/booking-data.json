@@ -1,0 +1,46 @@
+{
+  "providers": [
+    {
+      "id": "p1",
+      "name": "Dr. Emily Chan",
+      "type": "Doctor",
+      "specialty": "Family Medicine",
+      "location": "Central, Hong Kong",
+      "languages": ["English", "Cantonese"],
+      "about": "Experienced in family health and postnatal support.",
+      "slots": [
+        { "id": "s1", "label": "Mon 10:00 AM", "available": true },
+        { "id": "s2", "label": "Mon 2:00 PM", "available": true },
+        { "id": "s3", "label": "Tue 11:30 AM", "available": false }
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "Ms. Grace Wong",
+      "type": "Counselor",
+      "specialty": "Emotional Support Counseling",
+      "location": "Tsim Sha Tsui, Hong Kong",
+      "languages": ["English", "Cantonese", "Mandarin"],
+      "about": "Provides emotional support for stress, low mood, and family adjustment.",
+      "slots": [
+        { "id": "s1", "label": "Wed 9:30 AM", "available": true },
+        { "id": "s2", "label": "Wed 3:00 PM", "available": true },
+        { "id": "s3", "label": "Thu 1:00 PM", "available": true }
+      ]
+    },
+    {
+      "id": "p3",
+      "name": "Dr. Jason Lee",
+      "type": "Doctor",
+      "specialty": "Obstetrics & Gynecology",
+      "location": "Sha Tin, Hong Kong",
+      "languages": ["English", "Cantonese"],
+      "about": "Supports maternal health, recovery, and follow-up care.",
+      "slots": [
+        { "id": "s1", "label": "Fri 10:00 AM", "available": true },
+        { "id": "s2", "label": "Fri 4:00 PM", "available": false },
+        { "id": "s3", "label": "Sat 11:00 AM", "available": true }
+      ]
+    }
+  ]
+}
