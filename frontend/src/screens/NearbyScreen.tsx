@@ -284,7 +284,7 @@ export default function NearbyScreen() {
       />
     </View>
 
-    <View style={{ flexDirection: "row", gap: 10, marginBottom: 12 }}>
+    <View style={{ flexDirection: "row", gap: 10, marginBottom: 12, marginTop:12 }}>
       {["All", "AE", "Without AE"].map((type) => (
         <TouchableOpacity
           key={type}
@@ -304,8 +304,6 @@ export default function NearbyScreen() {
     </View>
 
       {/* Hospital list */}
-      <View>
-      <ScrollView>
       {filteredHospitals.map((hospital) => {
         const isSelected = selectedHospitalId === hospital.institution_eng;
 
@@ -326,11 +324,41 @@ export default function NearbyScreen() {
             <Text style={styles.hospitalName}>{hospital.institution_tc}</Text>
             <Text style={styles.hospitalAdd}>{hospital.address_eng}</Text>
             <Text style={styles.hospitalAdd}>{hospital.address_tc}</Text>
+
+            <View style={styles.actionRow}>
+    
+    {/* 📍 Open in Maps */}
+            <TouchableOpacity
+              style={styles.actionButton}
+              onPress={() =>
+                Linking.openURL(
+                  `https://www.google.com/maps/search/?api=1&query=${hospital.latitude},${hospital.longitude}`
+                )
+              }
+            >
+              <Feather name="map-pin" size={16} color="#4338CA" />
+              <Text style={styles.actionButtonText}>Directions</Text>
+            </TouchableOpacity>
+
+            {/* 🔍 Google search */}
+            <TouchableOpacity
+              style={styles.actionButton}
+              onPress={() =>
+                Linking.openURL(
+                  `https://www.google.com/search?q=${encodeURIComponent(
+                    hospital.institution_eng + " " + hospital.address_eng
+                  )}`
+                )
+              }
+            >
+              <Feather name="search" size={16} color="#4338CA" />
+              <Text style={styles.actionButtonText}>Search</Text>
+            </TouchableOpacity>
+
+          </View>
           </TouchableOpacity>
         );
       })}
-      </ScrollView>
-      </View>
     </ScrollView>
   );
 }
@@ -478,5 +506,27 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: "#6B7280",
     marginBottom: 14,
+  },
+
+  actionRow: {
+    flexDirection: "row",
+    gap: 12,
+    marginTop: 10,
+  },
+
+  actionButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    backgroundColor: "#EEF2FF",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 10,
+  },
+
+  actionButtonText: {
+    color: "#4338CA",
+    fontWeight: "700",
+    fontSize: 13,
   },
 });
