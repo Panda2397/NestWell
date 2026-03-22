@@ -286,6 +286,17 @@ export const styles = StyleSheet.create({
     gap: 12,
     },
 
+    emerHotlineCallButton: {
+    marginTop: 4,
+    backgroundColor: "#d32a1e",
+    borderRadius: 22,
+    paddingVertical: 22,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 12,
+    },
+
     hotlineCallButtonText: {
     color: "white",
     fontSize: 20,

@@ -133,77 +133,72 @@ export default function QuizScreen({ navigation }: any) {
           {profile?.primaryType === "highRisk" && (
             <View style={{ marginTop: 20, gap: 16 }}>
 
-              {/* 🇨🇦 CANADA */}
+
+
+              {/* Emergency */}
               <View style={styles.hotlineCard}>
                 <View style={styles.hotlineTopRow}>
+
                   <View style={styles.hotlineIconWrap}>
                     <Feather name="headphones" size={28} color="#E11D48" />
                   </View>
 
                   <View style={styles.hotlineBadge}>
-                    <Text style={styles.hotlineBadgeText}>CANADA</Text>
+                  <Text style={styles.hotlineBadgeText}>Hong Kong</Text>
                   </View>
                 </View>
-
-                <Text style={styles.hotlineTitle}>
-                  988 Mental Health Helpline
-                </Text>
-
+      
+                <Text style={styles.hotlineTitle}>999 Emergency Services</Text>
                 <Text style={styles.hotlineDescription}>
-                  Free, 24/7 support for anyone experiencing emotional distress in Canada.
+                  Call 999 for immediate danger or emergency assistance.
                 </Text>
-
-                <View style={styles.hotlineDivider} />
+      
+          <View style={styles.hotlineDivider} />
 
                 <View style={styles.hotlineHoursRow}>
                   <Text style={styles.hotlineHoursLabel}>Available</Text>
                   <Text style={styles.hotlineHoursValue}>24/7</Text>
                 </View>
-
                 <TouchableOpacity
-                  style={styles.hotlineCallButton}
-                  onPress={() => Linking.openURL("tel:988")}
+                  style={styles.emerHotlineCallButton}
+                  onPress={() => Linking.openURL("tel:999")}
                 >
-                  <Feather name="phone" size={20} color="white" />
-                  <Text style={styles.hotlineCallButtonText}>Call 988</Text>
+                  <Feather name="phone" size={18} color="white" />
+                  <Text style={styles.hotlineCallButtonText}>Call 999</Text>
                 </TouchableOpacity>
               </View>
-
-              {/* 🇬🇧 UK */}
+      
+              {/* Suicide Prevention */}
               <View style={styles.hotlineCard}>
                 <View style={styles.hotlineTopRow}>
                   <View style={styles.hotlineIconWrap}>
-                    <Feather name="headphones" size={28} color="#0EA5E9" />
+                    <Feather name="headphones" size={28} color="#E11D48" />
                   </View>
-
-                  <View style={[styles.hotlineBadge, { backgroundColor: "#E0F2FE" }]}>
-                    <Text style={[styles.hotlineBadgeText, { color: "#0369A1" }]}>
-                      UK
-                    </Text>
+                  <View style={styles.hotlineBadge}>
+                    <Text style={styles.hotlineBadgeText}>Hong Kong</Text>
                   </View>
                 </View>
-
+      
                 <Text style={styles.hotlineTitle}>
-                  NHS 111 Mental Health Support
+                  The Samaritan Befrienders Hong Kong
                 </Text>
-
                 <Text style={styles.hotlineDescription}>
-                  Urgent mental health support via NHS. Select the mental health option when calling.
+                  24-hour emotional support hotline for people in distress or crisis.
                 </Text>
-
-                <View style={styles.hotlineDivider} />
+            
+            <View style={styles.hotlineDivider} />
 
                 <View style={styles.hotlineHoursRow}>
                   <Text style={styles.hotlineHoursLabel}>Available</Text>
                   <Text style={styles.hotlineHoursValue}>24/7</Text>
                 </View>
-
+      
                 <TouchableOpacity
-                  style={[styles.hotlineCallButton, { backgroundColor: "#0F172A" }]}
-                  onPress={() => Linking.openURL("tel:111")}
+                  style={styles.hotlineCallButton}
+                  onPress={() => Linking.openURL("tel:23892222")}
                 >
-                  <Feather name="phone" size={20} color="white" />
-                  <Text style={styles.hotlineCallButtonText}>Call 111</Text>
+                  <Feather name="phone" size={18} color="white" />
+                  <Text style={styles.hotlineCallButtonText}>Call</Text>
                 </TouchableOpacity>
               </View>
 
