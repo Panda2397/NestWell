@@ -544,6 +544,8 @@ const styles = StyleSheet.create({
    learnRecommendedSection: {
     width: "100%",
     marginBottom: 12,
+    rowGap: 12,
+
   },
 
   learnSectionTitle: {

@@ -110,28 +110,41 @@ export default function LearnScreen() {
               <Text style={styles.learnSectionTitle}>Recommended for you</Text>
 
               {recommendedArticles.slice(0, 3).map((article) => (
-                <View key={`rec-${article.id}`} style={styles.learnCard}>
-                  
-                  <Text style={styles.learnCardCategory}>{article.category}</Text>
-                  <Text style={styles.learnCardTitle} numberOfLines={2}>
-                    {article.title}
-                  </Text>
+                <View key={article.id} style={styles.learnCard}>
+                  <View style={styles.learnCardHeader}>
+                    <Text style={styles.learnCardCategory}>{article.category}</Text>
+                    {(article.human_checked || article.ai_checked) && (
+                      <View style={styles.verifiedBadgeWrap}>
+                        <Pressable
+                          onPress={() => setActiveBadgeTooltip((cur) => (cur === article.id ? null : article.id))}
+                          onHoverIn={() => setActiveBadgeTooltip(article.id)}
+                          onHoverOut={() => setActiveBadgeTooltip(null)}
+                          accessibilityLabel={article.human_checked ? 'Verified (Human)' : 'Verified (AI)'}
+                        >
+                          <Image
+                            source={require('../../assets/verfied_badge.png')}
+                            style={styles.verifiedBadgeImage}
+                          />
+                        </Pressable>
+
+                        {activeBadgeTooltip === article.id && (
+                          <View style={styles.badgeTooltip}>
+                            <Text style={styles.badgeTooltipText}>Doctor verified</Text>
+                          </View>
+                        )}
+                      </View>
+                    )}
+                  </View>
+
+                  <Text style={styles.learnCardTitle}>{article.title}</Text>
 
                   <Pressable onPress={() => handleOpenArticle(article.url)}>
                     <Text style={styles.learnCardLink}>
                       Read {article.id.startsWith('a') ? 'article' : article.id.startsWith('v') ? 'video' : 'resource'}
                     </Text>
                   </Pressable>
-
-                  {(article.human_checked || article.ai_checked) && (
-                    <View style={styles.learnVerifiedBadge}>
-                      <Text style={styles.learnVerifiedText}>
-                        {article.human_checked ? 'Verified by Human' : 'Verified by AI'}
-                      </Text>
-                    </View>
-                  )}
                 </View>
-              ))}
+                  ))}
             </View>
           )}
 
