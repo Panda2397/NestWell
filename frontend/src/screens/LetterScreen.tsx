@@ -1,41 +1,19 @@
 import { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Image, Pressable, ScrollView, Modal, TextInput, useWindowDimensions } from 'react-native';
-import styles from '../styles.ts';
-import { addForumPostToDb, getForumPostsFromDb, type ForumPost } from '../letters/forum.db.ts'; //this is a fake db,
+import { Text, View, Pressable, ScrollView, Modal, TextInput, useWindowDimensions } from 'react-native';
+import styles from './styles/LetterScreen.styles';
+import VerifiedBadge from '../components/VerifiedBadge';
+import { addForumPostToDb, getForumPostsFromDb, type ForumPost } from '../databases/letters/forum.db.ts'; //this is a fake db,
 
 type ForumCardViewProps = Pick<ForumPost, 'text' | 'username' | 'verified'>;
 type ActionTooltipKey = 'report' | 'read';
 
 function ForumCard({ text, username, verified}: ForumCardViewProps) {
-  const [showBadgeTooltip, setShowBadgeTooltip] = useState(false);
-
   return (
     <View style={styles.card}>
       <View style={styles.headerRow}>
         <Text style={styles.username}>@{username}</Text>
-        {verified && (
-          <View style={styles.verifiedBadgeWrap}>
-            <Pressable
-              onHoverIn={() => setShowBadgeTooltip(true)}
-              onHoverOut={() => setShowBadgeTooltip(false)}
-              onPressIn={() => setShowBadgeTooltip(true)}
-              onPressOut={() => setShowBadgeTooltip(false)}
-              accessibilityLabel={`Verified ${verified}`}
-            >
-              <Image
-                source={require('../../assets/verfied_badge.png')}
-                style={styles.verifiedBadgeImage}
-              />
-            </Pressable>
-
-            {showBadgeTooltip && (
-              <View style={styles.badgeTooltip}>
-                <Text numberOfLines={1} style={styles.badgeTooltipText}>Verified {verified}</Text>
-              </View>
-            )}
-          </View>
-        )}
+        <VerifiedBadge human_checked={typeof verified === 'string' ? verified === 'doctor' : verified} ai_checked={verified === 'ai'} />
       </View>
 
       <Text style={styles.bodyText}>{text}</Text>

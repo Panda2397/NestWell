@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
 import { Linking, Pressable, ScrollView, Text, View, Image } from 'react-native';
-import styles from '../styles.ts';
-import LearnData from '../learn/learn-example-data.json';
-import { UserType } from '../types/user.ts';
-import { useProfile } from '../context/ProfileContext.tsx';
+import styles from './styles/LearnScreen.styles';
+import VerifiedBadge from '../components/VerifiedBadge';
+import LearnData from '../databases/learn/learn-example-data.json';
+import { useProfile } from '../context/ProfileContext';
+import { UserType } from '../types/user';
 
 type LearnArticle = {
   id: string;
@@ -20,7 +21,7 @@ export default function LearnScreen() {
   const [articles] = useState<LearnArticle[]>(LearnData.articles || []);
   const [selectedCategory, setSelectedCategory] = useState<string>(ALL_CATEGORIES);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [activeBadgeTooltip, setActiveBadgeTooltip] = useState<string | null>(null);
+  
 
   const { profile } = useProfile();
 
@@ -153,26 +154,9 @@ export default function LearnScreen() {
             <View key={article.id} style={styles.learnCard}>
               <View style={styles.learnCardHeader}>
                 <Text style={styles.learnCardCategory}>{article.category}</Text>
-                {(article.human_checked || article.ai_checked) && (
-                  <View style={styles.verifiedBadgeWrap}>
-                    <Pressable
-                      onPress={() => setActiveBadgeTooltip((cur) => (cur === article.id ? null : article.id))}
-                      onHoverIn={() => setActiveBadgeTooltip(article.id)}
-                      onHoverOut={() => setActiveBadgeTooltip(null)}
-                      accessibilityLabel={article.human_checked ? 'Verified (Human)' : 'Verified (AI)'}
-                    >
-                      <Image
-                        source={require('../../assets/verfied_badge.png')}
-                        style={styles.verifiedBadgeImage}
-                      />
-                    </Pressable>
 
-                    {activeBadgeTooltip === article.id && (
-                      <View style={styles.badgeTooltip}>
-                        <Text style={styles.badgeTooltipText}>Doctor verified</Text>
-                      </View>
-                    )}
-                  </View>
+                {(article.human_checked || article.ai_checked) && (
+                  <VerifiedBadge human_checked={article.human_checked} ai_checked={article.ai_checked} />
                 )}
               </View>
 

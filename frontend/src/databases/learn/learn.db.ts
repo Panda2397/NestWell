@@ -1,4 +1,3 @@
-
 import learnData from './learn-example-data.json';
 
 export type LearnArticle = {
@@ -18,7 +17,6 @@ const data = learnData as LearnDataFile;
 let articlesStore: LearnArticle[] = [...data.articles];
 
 export async function getLearnArticlesFromDb(): Promise<LearnArticle[]> {
-	// Mock DB call — returns the articles in memory.
 	return Promise.resolve(articlesStore);
 }
 
