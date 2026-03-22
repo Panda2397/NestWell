@@ -162,25 +162,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
   },
-   learnRecommendedSection: {
-    width: "100%",
-    marginBottom: 12,
-    rowGap: 12,
 
-  },
-
-  learnSectionTitle: {
-    fontSize: 22,
-    fontWeight: "800",
-    color: "#111827",
-    marginBottom: 16,
-  },
-
-  learnSectionSubtitle: {
-    fontSize: 14,
-    color: "#6B7280",
-    marginBottom: 12,
-  },
 });
 
 export default styles;

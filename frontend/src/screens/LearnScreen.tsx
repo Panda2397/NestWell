@@ -3,8 +3,9 @@ import { Linking, Pressable, ScrollView, Text, View, Image } from 'react-native'
 import styles from './styles/LearnScreen.styles';
 import VerifiedBadge from '../components/VerifiedBadge';
 import LearnData from '../databases/learn/learn-example-data.json';
+import { UserType} from '../types/user';
 import { useProfile } from '../context/ProfileContext';
-import { UserType } from '../types/user';
+
 
 type LearnArticle = {
   id: string;
@@ -114,26 +115,9 @@ export default function LearnScreen() {
                 <View key={article.id} style={styles.learnCard}>
                   <View style={styles.learnCardHeader}>
                     <Text style={styles.learnCardCategory}>{article.category}</Text>
+                    
                     {(article.human_checked || article.ai_checked) && (
-                      <View style={styles.verifiedBadgeWrap}>
-                        <Pressable
-                          onPress={() => setActiveBadgeTooltip((cur) => (cur === article.id ? null : article.id))}
-                          onHoverIn={() => setActiveBadgeTooltip(article.id)}
-                          onHoverOut={() => setActiveBadgeTooltip(null)}
-                          accessibilityLabel={article.human_checked ? 'Verified (Human)' : 'Verified (AI)'}
-                        >
-                          <Image
-                            source={require('../../assets/verfied_badge.png')}
-                            style={styles.verifiedBadgeImage}
-                          />
-                        </Pressable>
-
-                        {activeBadgeTooltip === article.id && (
-                          <View style={styles.badgeTooltip}>
-                            <Text style={styles.badgeTooltipText}>Doctor verified</Text>
-                          </View>
-                        )}
-                      </View>
+                      <VerifiedBadge human_checked={article.human_checked} ai_checked={article.ai_checked} />
                     )}
                   </View>
 
