@@ -84,8 +84,8 @@ export default function LearnScreen() {
                   <View style={styles.verifiedBadgeWrap}>
                     <Pressable
                       onPress={() => setActiveBadgeTooltip((cur) => (cur === article.id ? null : article.id))}
-                      onMouseEnter={() => setActiveBadgeTooltip(article.id)}
-                      onMouseLeave={() => setActiveBadgeTooltip(null)}
+                      onHoverIn={() => setActiveBadgeTooltip(article.id)}
+                      onHoverOut={() => setActiveBadgeTooltip(null)}
                       accessibilityLabel={article.human_checked ? 'Verified (Human)' : 'Verified (AI)'}
                     >
                       <Image
