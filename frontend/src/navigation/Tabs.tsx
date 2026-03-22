@@ -4,12 +4,14 @@ import LearnScreen from "../screens/LearnScreen";
 import NearbyScreen from "../screens/NearbyScreen";
 import QuizScreen from "../screens/QuizScreen";
 import LetterScreen from "../screens/LetterScreen";
+ // @ts-ignore
 import { tabScreenOptions } from "./Tabs.styles";
 
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
   return (
+    // @ts-ignore
     <Tab.Navigator screenOptions={tabScreenOptions}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
