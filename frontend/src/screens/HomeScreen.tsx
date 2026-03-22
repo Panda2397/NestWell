@@ -46,21 +46,6 @@ export default function HomeScreen() {
             <ScrollView contentContainerStyle={{ padding: 16, gap: 12, paddingBottom: 40 }}>
             <MoodCalendar />
 
-            <Text style={{ fontSize: 20, fontWeight: "600" }}>How are you today?</Text>
-
-            <View style={{ gap: 8 }}>
-                <Button title="😢 Stressed" onPress={() => setMood("stressed")} />
-                <Button title="😐 OK" onPress={() => setMood("ok")} />
-                <Button title="🙂 Good" onPress={() => setMood("good")} />
-            </View>
-
-            <Text>Selected mood: {mood ?? "-"}</Text>
-
-            {profile ? (
-                <Text>Your type: {profile.primaryType}</Text>
-            ) : (
-                <Text>No profile yet</Text>
-            )}
             </ScrollView>
         </View>
     );

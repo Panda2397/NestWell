@@ -247,7 +247,7 @@ export default function MoodCalendar() {
         )}
 
         <Text style={{ fontSize: 16, fontWeight: "600", marginTop: 10 }}>
-    Notes for {selectedDate}
+    Diary for {selectedDate}
     </Text>
 
     <TextInput
