@@ -18,6 +18,14 @@ try {
 } catch (err) {
 }
 
+// Diagnostic: log availability so we can see why notifications are no-ops on Android
+try {
+  // eslint-disable-next-line no-console
+  console.log('[notif] Platform', Platform.OS, 'notificationsAvailable', notificationsAvailable, 'Device.isDevice', Device?.isDevice);
+} catch (e) {
+  // ignore logging errors
+}
+
 if (notificationsAvailable && typeof Notifications.setNotificationHandler === 'function') {
   Notifications.setNotificationHandler({
     handleNotification: async () => ({
